@@ -266,7 +266,7 @@ For simulation, we use a rectangular part of the OSM, in most cases, we select a
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=10cm]{img/debrecen_coa.png}
-\caption{The map of Debrecen exported from the OpenStreetMap database.}
+\caption{The map of Debrecen exported from the OpenStreetMap database. \copyright OpenStreetMap contributors.}
 \label{debrecen_map}
 \end{figure}
 
@@ -288,7 +288,7 @@ Two monitors are included within the system, rcwin and rclog. Both have similar 
 \subfigure{\includegraphics[width=8cm]{img/m3.png}}
 \subfigure{\includegraphics[width=8cm]{img/m4.png}}
 \end{center}
-\caption{The rcwin in operation. Source: \cite{infocomjournal}.}
+\caption{The rcwin in operation. Source: \cite{infocomjournal}. \copyright OpenStreetMap contributors}
 \label{rcwin_example}
 \end{figure} 
 
@@ -362,7 +362,7 @@ The RCE uses the agent-based approach, moreover, it can be considered as a stand
 The first rapid prototype of the OOCWC system is called Justine. It has 3 main components, the RCE, the rcwin and the rclog. This prototype uses the OSM database and processes it with the Osmium Library. The result of this processing is a routing map graph and a BGL graph. The routing map graph then placed into a shared memory segment by the smart city server. The traffic server simulates the traffic. A sample client program is provided to the original version that demonstrates how a client can connect to the server and how the shared memory segment should be operated. One implementation of the RCE is the \enquote{Police Edition}.
 
 \paragraph{Basic operation of the simulation model}
-As we mentioned earlier, the simulation takes place on a rectangular part of the OSM. In the case of the standard competition map of Debrecen, the routing graph has 77,591 edges and 37,455 vertices. We slice all edges for parts 3 meters long. Based on NaSch terminology, these parts are called cells. Therefore, the cell length is equal to 3 meters. Since one simulation step lasts for 200 milliseconds, all cars move with the same velocity, 54 kmh. In contrast with the NaSch model, where a cell may contain many cars, edges can contain a given number of cars only (calculated as the edge length divided by the length of the cell, or part, i.e.~3 meters), since in our simulation, one cell can contain only one car.
+As we mentioned earlier, the simulation takes place on a rectangular part of the OSM. In the case of the standard competition map of Debrecen, the routing graph has 77,591 edges and 37,455 vertices. We slice all edges for parts 3 meters long. Based on NaSch terminology, these parts are called cells. Therefore, the cell length is equal to 3 meters. Since one simulation step lasts for 200 milliseconds, all cars move with the same velocity, 54 kmh. Edges can contain a given number of cars only (calculated as the edge length divided by the length of the cell, or part, i.e.~3 meters), since one cell can contain only one car. For simplicity, we use only one lane per direction for a road segment.
 
 In the original implementation, the traffic server moves the cars by random walk or ant simulation \cite{ant1}, \cite{ant2}. In the case of RCE, random walk means that when a car arrives at an intersection (i.e.~graph vertex) it choses its next street (i.e.~graph edge) based on uniform distribution. Ant simulation means that the next edge is selected with a probability that increases based on previous selections. In addition, the sample client has an implementation of Dijkstra's and Bellman-Ford algorithms (using the BGL) \cite{siek2002boost}.
 
@@ -667,7 +667,7 @@ osmium::unsigned_object_id_type virtual node(){
 \begin{figure}[ht!]
 \centerline{
 \includegraphics[width=11cm]{img/ut3.png}}
-\caption{The first step of the simulation initialized based on measured data. The input file contains the following lines: Kassai \'ut 789 \textbackslash  Egyetem sug\'ar\'ut 317  \textbackslash  F\"uredi \'ut 559. Source: \cite{infocomjournal}.}
+\caption{The first step of the simulation initialized based on measured data. The input file contains the following lines: Kassai \'ut 789 \textbackslash  Egyetem sug\'ar\'ut 317  \textbackslash  F\"uredi \'ut 559. Source: \cite{infocomjournal}. Base map and data from OpenStreetMap and OpenStreetMap Foundation. \copyright OpenStreetMap contributors.}
 \label{simulinit}
 \end{figure}
 
@@ -708,7 +708,7 @@ LoRa is a {{\bf Lo}}ng {{\bf Ra}}nge, low power consumption radio technology tha
 \chapter{Simulation algorithms}
 \label{simul}
 
-In this section, the proposed simulation algorithm will be introduced.\footnote{Because of the length regulations of the thesis, some parts of the mathematical model are omitted for brevity. For a detailed description, see paper \cite{traffic-paper}.} The model is based on graph theory and a Markov model of probability theory. First, we show the simulation algorithm that is included in the original OOCWC system and some other simulation tools and models. Then, we describe our model in detail. We use a publicly available dataset, so we outline the concept how we use this data. After, we describe the use of OSM data in our simulation environment. Finally, we outline our results and draw some conclusions.
+In this section, the proposed simulation algorithm will be introduced.\footnote{Because of the length regulations of the thesis, some parts of the mathematical model are omitted for brevity. For a detailed description, see paper \cite{traffic-paper} and its longer version on arXiv \cite{besenczi2020largescale}.} The model is based on graph theory and a Markov model of probability theory. First, we show the simulation algorithm that is included in the original OOCWC system and some other simulation tools and models. Then, we describe our model in detail. We use a publicly available dataset, so we outline the concept how we use this data. After, we describe the use of OSM data in our simulation environment. Finally, we outline our results and draw some conclusions.
 
 \section{Introduction}
 In the CSTS system, the initial state of the simulation can be initialized based on measured data or some prescribed distribution (e.g.~uniform one). The former can be seen in Fig.~\ref{simulinit}; in this case, we can observe how the distribution of the cars change during the simulation. Fig.~\ref{histoder} shows the change of the distribution in the case of the simulation algorithm included in the original OOCWC version. (The simulation occurs on the map of Debrecen represented with a graph.) The $x$ axis shows the streets, the $y$ axis shows the number of cars on that street. Only streets are shown that have at least one car on it. These histograms show the number of cars on the streets of Debrecen in a descending order. It is interesting to observe that the nature of the distribution did not change during the simulation. However, another important aspect is that the order of the streets should remain the same (we require a sort of stationarity). It can be observed that the order of the streets changed during the simulation. During the test, we initialized 10,000 cars based on the measured data. This can be seen on Fig.~\ref{simultenth}.
@@ -1111,8 +1111,7 @@ Maximum             & 2,324   & 61,055.58  \\
 \begin{figure}[t!]
 \centering
 \includegraphics[width = .7\textwidth]{img/pkdd15_map_subset.pdf}
-\caption{Map of the area covered by the selected subset of the dataset. The size of the area
-is 6.274 km $\times$ 6.963 km = 43.68 km$^2$}
+\caption{Map of the area covered by the selected subset of the dataset. The size of the area is 6.274 km $\times$ 6.963 km = 43.68 km$^2$. \copyright OpenStreetMap contributors.}
 \label{porto-map}
 \end{figure}
 \section{Graphs from OSM}
@@ -1222,8 +1221,8 @@ Sum & 1649 & 1 & 1
 
 \begin{figure}[!t]
     \centering
-    \includegraphics[width=.65\textwidth]{img/map_example.jpg}
-    \caption{A visual explanation of transitions of intersection 1110673569. TP means transition probability, yellow arrows indicate directions, red dots indicate nodes. Source: \cite{traffic-paper}. (Source of the map: openstreetmap.org, annotated by the authors.)}
+    \includegraphics[width=.65\textwidth]{img/map_example_new.jpg}
+    \caption{A visual explanation of transitions of intersection 1110673569. TP means transition probability, red dots indicate nodes. Source: \cite{traffic-paper}. (Base map and data from OpenStreetMap and OpenStreetMap Foundation. \copyright OpenStreetMap contributors, annotated by the authors.)}
     \label{mapexample}
 \end{figure}
 
@@ -1556,7 +1555,7 @@ A Real-Time Traffic Analyzer kimenete olyan aggregált adathalmaz, mely a Roboca
 \begin{singlespace}
 \small
 \noindent
-R. Besenczi, N. Bátfai, P. Jeszenszky, R. Major, F. Monori and M. Ispány. {\bf{Large-scale Analysis and Simulation of Traffic Flow using Markov Models}}. 2020. (Work in progress.)
+R. Besenczi, N. Bátfai, P. Jeszenszky, R. Major, F. Monori and M. Ispány. {\bf{Large-scale simulation of traffic flow using Markov model}}. PLoS one. (submitted) 2020.
 \\[10pt]
 \noindent
 N. Bátfai, R. Besenczi, A. Mamenyák, M. Ispány. {\bf{Traffic simulation based on the Robocar World Championship initiative}}. Infocommunications Journal 7:(3) pp. 50-59. 2015.
