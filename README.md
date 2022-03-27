@@ -1,6 +1,6 @@
 # PhD Thesis
 
-## Smart City Applications for Urban Traffic Management
+## Smart City Applications for Urban Traffic Analysis
 
 ### Summary
 
